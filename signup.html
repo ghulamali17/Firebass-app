@@ -8,8 +8,6 @@
         body {
             font-family: Arial, sans-serif;
             background: #f4f4f4;
-            margin: 0;
-            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -71,16 +69,15 @@
 <body>
     <div class="form-container">
         <h2>Sign Up</h2>
-        <div class="form">
-            <input id="name" type="text" placeholder="Enter Name">
-            <input id="email" type="email" placeholder="Enter Email">
-            <input id="password" type="password" placeholder="Enter Password">
-            <input id="phone" type="text" placeholder="Enter Phone Number">
-            <button id="signUp-btn">Sign Up</button>
+        <form id="signupForm" class="form">
+            <input id="username" type="text" placeholder="Enter your name">
+            <input id="email" type="email" placeholder="Enter email">
+            <input id="password" type="password" placeholder="Enter password">
+            <button type="submit">Sign Up</button>
             <p>Already have an account? <a href="login.html">Login</a></p>
-        </div>
+        </form>
     </div>
-    
+
     <script type="module" src="./app.js"></script>
 </body>
 </html>

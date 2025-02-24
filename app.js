@@ -6,28 +6,27 @@ import {
 import { auth, db } from "./firebaseConfig.js";
 import { setDoc, doc } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
 
-//  sign up 
-let signUpUser = async (name, email, password, phone, photoURL) => {
+// Function to sign up a new user
+let signUpUser = async (name, email, password, phone) => {
     try {
-        if (!name || !email || !password || !phone || !photoURL) {
+        if (!name || !email || !password || !phone) {
             alert("All fields are required!");
             return;
         }
 
+        // Create user with Firebase Authentication
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
-        await updateProfile(user, {
-            displayName: name,
-            photoURL: photoURL
-        });
+
+        // Update Firebase Auth Profile with Name
+        await updateProfile(user, { displayName: name });
 
         // Store user details in Firestore
         await setDoc(doc(db, "users", user.uid), {
             uid: user.uid,
             displayName: name,
             email: email,
-            phoneNumber: phone,
-            photoURL: photoURL
+            phoneNumber: phone
         });
 
         alert("Sign-Up Successful!");
@@ -39,7 +38,7 @@ let signUpUser = async (name, email, password, phone, photoURL) => {
     }
 };
 
-// sign in
+// Function to sign in an existing user
 let signIn = async (email, password) => {
     try {
         if (!email || !password) {
@@ -58,6 +57,7 @@ let signIn = async (email, password) => {
     }
 };
 
+// Attach event listeners after DOM is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
     const signUpBtn = document.querySelector("#signUp-btn");
     const loginBtn = document.querySelector("#login-btn");
@@ -68,8 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let email = document.querySelector("#email").value.trim();
             let password = document.querySelector("#password").value.trim();
             let phone = document.querySelector("#phone").value.trim();
-            let photoURL = document.querySelector("#photo").value.trim();
-            signUpUser(name, email, password, phone, photoURL);
+            signUpUser(name, email, password, phone);
         });
     }
 

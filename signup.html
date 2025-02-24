@@ -4,79 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .form-container {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-            width: 300px;
-            text-align: center;
-        }
-
-        .form-container h2 {
-            margin-bottom: 15px;
-        }
-
-        .form input {
-            width: 90%;
-            padding: 10px;
-            margin: 8px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .form button {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            border: none;
-            border-radius: 5px;
-            background: #007bff;
-            color: white;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .form button:hover {
-            background: #0056b3;
-        }
-
-        .form p {
-            margin-top: 10px;
-            font-size: 14px;
-        }
-
-        .form a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        .form a:hover {
-            text-decoration: underline;
-        }
-    </style>
 </head>
 <body>
-    <div class="form-container">
-        <h2>Sign Up</h2>
-        <form id="signupForm" class="form">
-            <input id="username" name="username" type="text" placeholder="Enter your name" required>
-            <input id="email" name="email" type="email" placeholder="Enter email" required>
-            <input id="password" name="password" type="password" placeholder="Enter password" required minlength="6">
-            <button type="submit">Sign Up</button>
-            <p>Already have an account? <a href="login.html">Login</a></p>
-        </form>
-    </div>
+    <h2>Sign Up</h2>
+    <input id="username" type="text" placeholder="Enter your name">
+    <input id="email" type="email" placeholder="Enter email">
+    <input id="password" type="password" placeholder="Enter password">
+    <button id="signup-btn">Sign Up</button>
+    <p>Already have an account? <a href="index.html">Login</a></p>
 
     <script type="module" src="./app.js"></script>
 </body>

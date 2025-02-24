@@ -3,3 +3,73 @@
     margin: 10px 0px;
     border: 2px solid black;
 }
+body {
+  font-family: Arial, sans-serif;
+  background: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 300px;
+}
+
+h2 {
+  margin-bottom: 15px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+button {
+  padding: 8px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+.google-btn {
+  background: white;
+  color: black;
+  border: 1px solid #ccc;
+}
+
+.google-btn:hover {
+  background: #ddd;
+}
+
+p {
+  font-size: 14px;
+}
+
+a {
+  color: blue;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+    }

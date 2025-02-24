@@ -1,16 +1,21 @@
 import { 
   auth, 
-  db, 
+  db 
+} from "./firebaseConfig.js";
+import { 
   createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword,
+  signInWithEmailAndPassword 
+} from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
+import { 
   doc, 
   setDoc, 
-  getDoc,
-  serverTimestamp
-} from "./firebaseConfig.js";
+  getDoc, 
+  serverTimestamp 
+} from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
 
-// ===================== SIGN UP FUNCTION =====================
 document.addEventListener("DOMContentLoaded", () => {
+  
+  // ===================== SIGN UP FUNCTION =====================
   const signupForm = document.getElementById("signupForm");
   if (signupForm) {
     signupForm.addEventListener("submit", async (e) => {
@@ -41,21 +46,13 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("Account created successfully!");
         window.location.href = "dashboard.html"; 
       } catch (error) {
-        if (error.code === "auth/email-already-in-use") {
-          alert("This email is already in use. Please log in.");
-          window.location.href = "login.html";
-        } else if (error.code === "auth/weak-password") {
-          alert("Password is too weak. Please use a stronger password.");
-        } else {
-          alert(`Error: ${error.message}`);
-        }
+        console.error(error.code, error.message);
+        alert(`Error: ${error.message}`);
       }
     });
   }
-});
 
-// ===================== LOGIN FUNCTION =====================
-document.addEventListener("DOMContentLoaded", () => {
+  // ===================== LOGIN FUNCTION =====================
   const loginBtn = document.getElementById("login-btn");
   if (loginBtn) {
     loginBtn.addEventListener("click", async () => {
@@ -70,13 +67,15 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
+
         localStorage.setItem("loggedInUserUID", user.uid);
         alert("Login Successful!");
         window.location.href = "dashboard.html";
       } catch (error) {
-        alert(`Login Error: ${error.message}`);
         console.error(error.code, error.message);
+        alert(`Login Error: ${error.message}`);
       }
     });
   }
+
 });

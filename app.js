@@ -11,11 +11,9 @@ import {
 document.addEventListener("DOMContentLoaded", () => {
 
   // ===================== SIGN UP FUNCTION =====================
-  const signupForm = document.getElementById("signupForm");
-  if (signupForm) {
-    signupForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
+  const signupBtn = document.getElementById("signup-btn");
+  if (signupBtn) {
+    signupBtn.addEventListener("click", async () => {
       const username = document.getElementById("username").value.trim();
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
@@ -44,12 +42,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ===================== SIGN IN FUNCTION =====================
-  const loginForm = document.getElementById("loginForm");
-  if (loginForm) {
-    loginForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
+  // ===================== LOGIN FUNCTION =====================
+  const loginBtn = document.getElementById("login-btn");
+  if (loginBtn) {
+    loginBtn.addEventListener("click", async () => {
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
 

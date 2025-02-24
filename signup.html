@@ -70,9 +70,9 @@
     <div class="form-container">
         <h2>Sign Up</h2>
         <form id="signupForm" class="form">
-            <input id="username" type="text" placeholder="Enter your name">
-            <input id="email" type="email" placeholder="Enter email">
-            <input id="password" type="password" placeholder="Enter password">
+            <input id="username" name="username" type="text" placeholder="Enter your name" required>
+            <input id="email" name="email" type="email" placeholder="Enter email" required>
+            <input id="password" name="password" type="password" placeholder="Enter password" required minlength="6">
             <button type="submit">Sign Up</button>
             <p>Already have an account? <a href="login.html">Login</a></p>
         </form>

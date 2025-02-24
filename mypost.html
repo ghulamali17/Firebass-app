@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Posts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #333;
+            color: white;
+            padding: 10px;
+        }
+        .header button {
+            background: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .post-box {
+            border: 1px solid black;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h2>My Posts</h2>
+        <div>
+            <button onclick="window.location.href='dashboard.html'">Back to Dashboard</button>
+            <button id="signOut">Logout</button>
+        </div>
+    </div>
+
+    <h1>My Posts</h1>
+    <div id="myPosts"></div>
+
+    <script type="module" src="./mypost.js"></script>
+</body>
+</html>

@@ -33,18 +33,20 @@
             padding: 10px;
             margin: 10px 0;
         }
+        .post-input-container {
+            display: flex;
+            gap: 10px;
+        }
         #post-inp {
-            width: 100%;
+            flex-grow: 1;
             padding: 10px;
-            margin: 10px 0;
         }
         #add-post {
             background: #28a745;
             color: white;
             border: none;
-            padding: 10px;
+            padding: 10px 15px;
             cursor: pointer;
-            width: 100%;
         }
     </style>
 </head>
@@ -60,8 +62,10 @@
 
     <div class="container">
         <h2>Create a Post</h2>
-        <input type="text" id="post-inp" placeholder="Write something...">
-        <button id="add-post">Add Post</button>
+        <div class="post-input-container">
+            <input type="text" id="post-inp" placeholder="Write something...">
+            <button id="add-post">Post</button>
+        </div>
 
         <h1>All Posts</h1>
         <div id="allPosts"></div>

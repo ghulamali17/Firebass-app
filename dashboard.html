@@ -5,32 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <style>
-        .box {
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #333;
+            color: white;
+            padding: 10px;
+        }
+        .header button {
+            background: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .post-box {
+            border: 1px solid black;
             padding: 10px;
             margin: 10px 0;
-            border: 2px solid black;
         }
     </style>
 </head>
 <body>
-    <h1>Dashboard</h1>
 
-    <button id="signOut">Sign Out</button>
-    <br><br>
+    <div class="header">
+        <h2>Dashboard</h2>
+        <div>
+            <button onclick="window.location.href='mypost.html'">My Posts</button>
+            <button id="signOut">Logout</button>
+        </div>
+    </div>
 
-    <input type="text" id="post-inp" placeholder="Write a post...">
-    <button id="add">Add Post</button>
-    
-    <br><br>
-
-    <button id="allPosts-btn">Show All Posts</button>
-    <button id="myPosts-btn">Show My Posts</button>
-
-    <h2>All Posts</h2>
+    <h1>All Posts</h1>
     <div id="allPosts"></div>
-
-    <h2>My Posts</h2>
-    <div id="myPosts"></div>
 
     <script type="module" src="./dashboard.js"></script>
 </body>

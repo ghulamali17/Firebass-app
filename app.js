@@ -1,31 +1,27 @@
 import { 
   auth, 
-  db 
-} from "./firebaseConfig.js";
-import { 
+  db, 
   createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword 
-} from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
-import { 
+  signInWithEmailAndPassword,
   doc, 
   setDoc, 
-  getDoc, 
-  serverTimestamp 
-} from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+  getDoc,
+  serverTimestamp
+} from "./firebaseConfig.js";
 
+// ===================== SIGN UP FUNCTION =====================
 document.addEventListener("DOMContentLoaded", () => {
-  
-  // ===================== SIGN UP FUNCTION =====================
   const signupForm = document.getElementById("signupForm");
   if (signupForm) {
     signupForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
+      e.preventDefault(); // Prevents page refresh
+
+      const username = document.getElementById("username").value.trim();
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
-      const username = document.getElementById("username").value.trim();
 
       if (!username || !email || !password) {
-        alert("All fields are required!");
+        alert("⚠️ All fields are required!");
         return;
       }
 
@@ -43,16 +39,19 @@ document.addEventListener("DOMContentLoaded", () => {
         await setDoc(doc(db, "users", user.uid), userData);
 
         localStorage.setItem("loggedInUserUID", user.uid);
-        alert("Account created successfully!");
+        localStorage.setItem("loggedInUsername", username); // Save username
+        alert("✅ Account created successfully!");
         window.location.href = "dashboard.html"; 
       } catch (error) {
-        console.error(error.code, error.message);
-        alert(`Error: ${error.message}`);
+        console.error("Signup Error:", error);
+        alert(`❌ Error: ${error.message}`);
       }
     });
   }
+});
 
-  // ===================== LOGIN FUNCTION =====================
+// ===================== LOGIN FUNCTION =====================
+document.addEventListener("DOMContentLoaded", () => {
   const loginBtn = document.getElementById("login-btn");
   if (loginBtn) {
     loginBtn.addEventListener("click", async () => {
@@ -60,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const password = document.getElementById("password").value.trim();
 
       if (!email || !password) {
-        alert("Email and Password cannot be empty!");
+        alert("⚠️ Email and Password cannot be empty!");
         return;
       }
 
@@ -68,14 +67,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        localStorage.setItem("loggedInUserUID", user.uid);
-        alert("Login Successful!");
-        window.location.href = "dashboard.html";
+        // Fetch user details from Firestore
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        if (userDoc.exists()) {
+          localStorage.setItem("loggedInUserUID", user.uid);
+          localStorage.setItem("loggedInUsername", userDoc.data().username);
+          alert("✅ Login Successful!");
+          window.location.href = "dashboard.html";
+        } else {
+          alert("⚠️ No user data found! Try signing up.");
+        }
       } catch (error) {
-        console.error(error.code, error.message);
-        alert(`Login Error: ${error.message}`);
+        console.error("Login Error:", error);
+        alert(`❌ Login Error: ${error.message}`);
       }
     });
   }
-
 });

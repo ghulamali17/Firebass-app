@@ -9,12 +9,13 @@ import {
   serverTimestamp
 } from "./firebaseConfig.js";
 
-// ===================== SIGN UP FUNCTION =====================
 document.addEventListener("DOMContentLoaded", () => {
+  
+  // ===================== SIGN UP FUNCTION =====================
   const signupForm = document.getElementById("signupForm");
   if (signupForm) {
     signupForm.addEventListener("submit", async (e) => {
-      e.preventDefault(); // Prevents page refresh
+      e.preventDefault(); 
 
       const username = document.getElementById("username").value.trim();
       const email = document.getElementById("email").value.trim();
@@ -30,8 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const user = userCredential.user;
 
         const userData = {
-          username: username,
-          email: email,
+          username,
+          email,
           createdAt: serverTimestamp(),
           uid: user.uid,
         };
@@ -39,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
         await setDoc(doc(db, "users", user.uid), userData);
 
         localStorage.setItem("loggedInUserUID", user.uid);
-        localStorage.setItem("loggedInUsername", username); // Save username
+        localStorage.setItem("loggedInUsername", username);
         alert("✅ Account created successfully!");
         window.location.href = "dashboard.html"; 
       } catch (error) {
@@ -48,13 +49,12 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-});
 
-// ===================== LOGIN FUNCTION =====================
-document.addEventListener("DOMContentLoaded", () => {
+  // ===================== LOGIN FUNCTION =====================
   const loginBtn = document.getElementById("login-btn");
   if (loginBtn) {
-    loginBtn.addEventListener("click", async () => {
+    loginBtn.addEventListener("click", async (e) => {
+      e.preventDefault(); 
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
 
@@ -67,7 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        // Fetch user details from Firestore
         const userDoc = await getDoc(doc(db, "users", user.uid));
         if (userDoc.exists()) {
           localStorage.setItem("loggedInUserUID", user.uid);

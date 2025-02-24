@@ -1,21 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+        }
+
+        .form-container h2 {
+            margin-bottom: 15px;
+        }
+
+        .form input {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .form button:hover {
+            background: #0056b3;
+        }
+
+        .form p {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .form a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .form a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-
-  <div class="container">
-    <h2>Login</h2>
-    <input id="email" type="email" placeholder="Email">
-    <input id="password" type="password" placeholder="Password">
-    <button id="login-btn">Login</button>
-    <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
-  </div>
-
-  <script type="module" src="./app.js"></script>
+    <div class="form-container">
+        <h2>Login</h2>
+        <div class="form">
+            <input id="email" type="email" placeholder="Enter email">
+            <input id="password" type="password" placeholder="Enter password">
+            <button id="login-btn">Login</button>
+            <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+        </div>
+    </div>
+    
+    <script type="module" src="./app.js"></script>
 </body>
-</html>
+  </html>

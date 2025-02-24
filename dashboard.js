@@ -24,7 +24,7 @@ let getAllPosts = async () => {
       allPostDiv.innerHTML += `<div class="post-box">${post.data().postText}</div>`;
     });
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching posts:", error);
   }
 };
 
@@ -34,7 +34,7 @@ let createPost = async (text) => {
     alert("Post cannot be empty!");
     return;
   }
-  
+
   try {
     await addDoc(collection(db, "posts"), {
       postText: text,
@@ -43,7 +43,7 @@ let createPost = async (text) => {
     postInput.value = ""; // Clear input after adding
     getAllPosts(); // Refresh posts
   } catch (error) {
-    console.error(error);
+    console.error("Error creating post:", error);
   }
 };
 
@@ -61,7 +61,7 @@ document.querySelector("#signOut").addEventListener("click", async () => {
       window.location.replace("./index.html");
     })
     .catch((error) => {
-      console.error(error.message);
+      console.error("Error logging out:", error.message);
     });
 });
 

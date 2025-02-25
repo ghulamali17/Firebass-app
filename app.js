@@ -1,9 +1,11 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 
-    "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
+import { 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword 
+} from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
 import { auth, db } from "./firebaseConfig.js";
-import { addDoc, collection } from 
-    "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+import { addDoc, collection } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
 
+//  user data to Firestore
 let addUserData = async (user) => {
     try {
         await addDoc(collection(db, "users"), {
@@ -15,6 +17,7 @@ let addUserData = async (user) => {
     }
 };
 
+//  Sign Up User
 let signUpUser = async (email, password) => {
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -23,10 +26,11 @@ let signUpUser = async (email, password) => {
         localStorage.setItem("loggedInUser", user.uid);
         window.location.replace("./dashboard.html");
     } catch (error) {
-        console.error(error.code, error.message);
+        console.error("Signup error:", error.message);
     }
 };
 
+//  signin User
 let signIn = async (email, password) => {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -34,18 +38,28 @@ let signIn = async (email, password) => {
         localStorage.setItem("loggedInUser", user.uid);
         window.location.replace("./dashboard.html");
     } catch (error) {
-        console.error(error.code, error.message);
+        console.error("Login error:", error.message);
     }
 };
 
-document.querySelector("#signUp-btn").addEventListener("click", () => {
-    let email = document.querySelector("#email").value;
-    let password = document.querySelector("#password").value;
-    signUpUser(email, password);
-});
+// Event Listeners
+document.addEventListener("DOMContentLoaded", () => {
+    let signUpBtn = document.querySelector("#signUp-btn");
+    let loginBtn = document.querySelector("#login-btn");
 
-document.querySelector("#login-btn").addEventListener("click", () => {
-    let email = document.querySelector("#email").value;
-    let password = document.querySelector("#password").value;
-    signIn(email, password);
+    if (signUpBtn) {
+        signUpBtn.addEventListener("click", () => {
+            let email = document.querySelector("#email").value;
+            let password = document.querySelector("#password").value;
+            signUpUser(email, password);
+        });
+    }
+
+    if (loginBtn) {
+        loginBtn.addEventListener("click", () => {
+            let email = document.querySelector("#email").value;
+            let password = document.querySelector("#password").value;
+            signIn(email, password);
+        });
+    }
 });

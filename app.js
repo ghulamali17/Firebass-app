@@ -25,7 +25,7 @@ let signUpUser = async (email, password) => {
         await addUserData(user);
         localStorage.setItem("loggedInUser", user.uid);
         
-        alert("Sign Up Successful! Redirecting to dashboard...");
+        alert("Sign Up Successful!");
         window.location.replace("./dashboard.html");
     } catch (error) {
         console.error("Signup error:", error.message);
@@ -40,7 +40,7 @@ let signIn = async (email, password) => {
         const user = userCredential.user;
         localStorage.setItem("loggedInUser", user.uid);
 
-        alert("Login Successful! Redirecting to dashboard...");
+        alert("Login Successful!");
         window.location.replace("./dashboard.html");
     } catch (error) {
         console.error("Login error:", error.message);

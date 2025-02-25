@@ -1,7 +1,5 @@
-import {
-  addDoc,
-  collection,
-  getDocs
+import { 
+  addDoc, collection, getDocs 
 } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
 import { signOut } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
 import { db, auth } from "./firebaseConfig.js";
@@ -10,25 +8,30 @@ let allPostDiv = document.querySelector("#allPosts");
 let postInput = document.querySelector("#post-inp");
 let addPostBtn = document.querySelector("#add-post");
 
+// user is logged in
 let loggedInUser = localStorage.getItem("loggedInUser");
 if (!loggedInUser) {
   window.location.replace("./index.html");
 }
 
-// Function to get all posts
+//  Display All Posts
 let getAllPosts = async () => {
   try {
     allPostDiv.innerHTML = "";
     const posts = await getDocs(collection(db, "posts"));
     posts.forEach((post) => {
-      allPostDiv.innerHTML += <div class="post-box">${post.data().postText}</div>;
+      let postData = post.data();
+      allPostDiv.innerHTML += `
+        <div class="post-box">
+          <p>${postData.postText}</p>
+        </div>`;
     });
   } catch (error) {
     console.error("Error fetching posts:", error);
   }
 };
 
-// Function to create a new post
+// Create a New Post
 let createPost = async (text) => {
   if (!text.trim()) {
     alert("Post cannot be empty!");
@@ -40,30 +43,28 @@ let createPost = async (text) => {
       postText: text,
       uid: loggedInUser,
     });
-    postInput.value = ""; // Clear input after adding
-    getAllPosts(); // Refresh posts
+    postInput.value = ""; 
+    getAllPosts(); 
   } catch (error) {
     console.error("Error creating post:", error);
   }
 };
 
-// Event listener for adding a post
+
 addPostBtn.addEventListener("click", () => {
   let postText = postInput.value;
   createPost(postText);
 });
 
-// Logout function
+// Logout Function
 document.querySelector("#signOut").addEventListener("click", async () => {
-  await signOut(auth)
-    .then(() => {
-      localStorage.removeItem("loggedInUser");
-      window.location.replace("./index.html");
-    })
-    .catch((error) => {
-      console.error("Error logging out:", error.message);
-    });
+  try {
+    await signOut(auth);
+    localStorage.removeItem("loggedInUser");
+    window.location.replace("./index.html");
+  } catch (error) {
+    console.error("Logout error:", error);
+  }
 });
 
-// Load posts on page load
 getAllPosts();

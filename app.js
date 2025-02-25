@@ -1,12 +1,19 @@
+// import { 
+//   auth, 
+//   db, 
+//   createUserWithEmailAndPassword, 
+//   signInWithEmailAndPassword,
+//   doc, 
+//   setDoc, 
+//   getDoc
+// } from "./firebaseConfig.js";
+import { auth, db } from "./firebaseConfig.js";
 import { 
-  auth, 
-  db, 
   createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword,
-  doc, 
-  setDoc, 
-  getDoc
-} from "./firebaseConfig.js";
+  signInWithEmailAndPassword 
+} from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
+import { doc, setDoc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+
 
 document.addEventListener("DOMContentLoaded", () => {
 

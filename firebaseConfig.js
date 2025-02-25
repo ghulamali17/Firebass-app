@@ -1,28 +1,24 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-analytics.js";
-  import { getAuth } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
-  import { getFirestore } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
-  // Import the functions you need from the SDKs you need
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-analytics.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js";
 
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyCZpZWIJ0mLgOqAzMC5jMbBdOgAgn_rL2M",
-    authDomain: "ecommerce-19ff4.firebaseapp.com",
-    projectId: "ecommerce-19ff4",
-    storageBucket: "ecommerce-19ff4.firebasestorage.app",
-    messagingSenderId: "521272247200",
-    appId: "1:521272247200:web:7996007c1a00fe39ecdac5"
-  };
+const firebaseConfig = {
+    apiKey: "AIzaSyA4Syy5HnBB_8gLQ5g53zYjOpAYaChkTEY",
+    authDomain: "form-5437b.firebaseapp.com",
+    databaseURL: "https://form-5437b-default-rtdb.firebaseio.com",
+    projectId: "form-5437b",
+    storageBucket: "form-5437b.firebasestorage.app",
+    messagingSenderId: "1066721287085",
+    appId: "1:1066721287085:web:4cfdfd64352cd91e091f24"
+};
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
-// Initialize Firebase Authentication and get a reference to the service
+// Initialize Firebase Authentication and Firestore
 const auth = getAuth(app);
-// Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
 
-export { app, auth,db}
+export { app, auth, db };

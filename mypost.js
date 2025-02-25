@@ -20,7 +20,7 @@ let getMyPosts = async () => {
     const q = query(collection(db, "posts"), where("uid", "==", loggedInUser));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((post) => {
-      myPostDiv.innerHTML += `<div class="post-box">${post.data().postText}</div>`;
+      myPostDiv.innerHTML += <div class="post-box">${post.data().postText}</div>;
     });
   } catch (error) {
     console.error(error);

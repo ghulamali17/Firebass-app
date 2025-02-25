@@ -4,19 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <script type="module" src="dashboard.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #333;
+            color: white;
+            padding: 10px;
+        }
+        .header button {
+            background: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+        .post-box {
+            border: 1px solid black;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .post-input-container {
+            display: flex;
+            gap: 10px;
+        }
+        #post-inp {
+            flex-grow: 1;
+            padding: 10px;
+        }
+        #add-post {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Dashboard</h1>
-        <button id="signOut">Logout</button>
-    </header>
 
-    <h2>All Posts</h2>
-    <div id="allPosts"></div>
+    <div class="header">
+        <h2>Dashboard</h2>
+        <div>
+            <button onclick="window.location.href='mypost.html'">My Posts</button>
+            <button id="signOut">Logout</button>
+        </div>
+    </div>
 
-    <h2>Add a Post</h2>
-    <input type="text" id="post-inp" placeholder="Write something...">
-    <button id="add-post">Post</button>
+    <div class="container">
+        <h2>Create a Post</h2>
+        <div class="post-input-container">
+            <input type="text" id="post-inp" placeholder="Write something...">
+            <button id="add-post">Post</button>
+        </div>
+
+        <h1>All Posts</h1>
+        <div id="allPosts"></div>
+    </div>
+
+    <script type="module" src="./dashboard.js"></script>
 </body>
 </html>

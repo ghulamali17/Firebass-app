@@ -24,21 +24,27 @@ let signUpUser = async (email, password) => {
         const user = userCredential.user;
         await addUserData(user);
         localStorage.setItem("loggedInUser", user.uid);
+        
+        alert("Sign Up Successful! Redirecting to dashboard...");
         window.location.replace("./dashboard.html");
     } catch (error) {
         console.error("Signup error:", error.message);
+        alert(`Sign Up Failed: ${error.message}`);
     }
 };
 
-//  signin User
+//  Sign In User
 let signIn = async (email, password) => {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
         localStorage.setItem("loggedInUser", user.uid);
+
+        alert("Login Successful! Redirecting to dashboard...");
         window.location.replace("./dashboard.html");
     } catch (error) {
         console.error("Login error:", error.message);
+        alert(`Login Failed: ${error.message}`);
     }
 };
 
@@ -51,6 +57,12 @@ document.addEventListener("DOMContentLoaded", () => {
         signUpBtn.addEventListener("click", () => {
             let email = document.querySelector("#email").value;
             let password = document.querySelector("#password").value;
+            
+            if (!email || !password) {
+                alert("Please enter both email and password.");
+                return;
+            }
+            
             signUpUser(email, password);
         });
     }
@@ -59,6 +71,12 @@ document.addEventListener("DOMContentLoaded", () => {
         loginBtn.addEventListener("click", () => {
             let email = document.querySelector("#email").value;
             let password = document.querySelector("#password").value;
+
+            if (!email || !password) {
+                alert("Please enter both email and password.");
+                return;
+            }
+
             signIn(email, password);
         });
     }

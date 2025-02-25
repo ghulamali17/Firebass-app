@@ -1,4 +1,4 @@
-import { 
+import {
   addDoc,
   collection,
   getDocs
@@ -10,7 +10,7 @@ let allPostDiv = document.querySelector("#allPosts");
 let postInput = document.querySelector("#post-inp");
 let addPostBtn = document.querySelector("#add-post");
 
-let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+let loggedInUser = localStorage.getItem("loggedInUser");
 if (!loggedInUser) {
   window.location.replace("./index.html");
 }
@@ -31,22 +31,19 @@ let getAllPosts = async () => {
 // Function to create a new post
 let createPost = async (text) => {
   if (!text.trim()) {
-    alert("⚠️ Post cannot be empty!");
+    alert("Post cannot be empty!");
     return;
   }
 
   try {
     await addDoc(collection(db, "posts"), {
       postText: text,
-      email: loggedInUser.email, // Storing email instead of username
-      uid: loggedInUser.uid,
+      uid: loggedInUser,
     });
     postInput.value = ""; // Clear input after adding
-    alert("✅ Post added successfully!");
     getAllPosts(); // Refresh posts
   } catch (error) {
     console.error("Error creating post:", error);
-    alert("❌ Error adding post. Try again!");
   }
 };
 
@@ -58,15 +55,14 @@ addPostBtn.addEventListener("click", () => {
 
 // Logout function
 document.querySelector("#signOut").addEventListener("click", async () => {
-  try {
-    await signOut(auth);
-    localStorage.removeItem("loggedInUser");
-    alert("✅ Logged out successfully!");
-    window.location.replace("./index.html");
-  } catch (error) {
-    console.error("Error logging out:", error.message);
-    alert("❌ Error logging out. Try again!");
-  }
+  await signOut(auth)
+    .then(() => {
+      localStorage.removeItem("loggedInUser");
+      window.location.replace("./index.html");
+    })
+    .catch((error) => {
+      console.error("Error logging out:", error.message);
+    });
 });
 
 // Load posts on page load

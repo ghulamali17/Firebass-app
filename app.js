@@ -1,12 +1,3 @@
-// import { 
-//   auth, 
-//   db, 
-//   createUserWithEmailAndPassword, 
-//   signInWithEmailAndPassword,
-//   doc, 
-//   setDoc, 
-//   getDoc
-// } from "./firebaseConfig.js";
 import { auth, db } from "./firebaseConfig.js";
 import { 
   createUserWithEmailAndPassword, 

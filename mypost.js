@@ -15,28 +15,31 @@ if (!loggedInUser) {
 // Display User's Posts
 let getMyPosts = async () => {
   try {
-    myPostDiv.innerHTML = "";
+    myPostDiv.innerHTML = "<p>Loading posts...</p>";
+
     const q = query(collection(db, "posts"), where("uid", "==", loggedInUser));
     const querySnapshot = await getDocs(q);
 
     if (querySnapshot.empty) {
-      myPostDiv.innerHTML = "<p>No posts available.</p>";
+      myPostDiv.innerHTML = "<p>No posts found.</p>";
       return;
     }
 
-    querySnapshot.forEach((post) => {
-      let postData = post.data();
-      let postId = post.id; 
+    myPostDiv.innerHTML = ""; 
+    querySnapshot.forEach((postDoc) => {
+      let postData = postDoc.data();
+      let postId = postDoc.id; 
 
       myPostDiv.innerHTML += `
         <div class="post-box" id="post-${postId}">
           <p id="post-text-${postId}">${postData.postText}</p>
-          <button onclick="editPost('${postId}', '${postData.postText}')">Edit</button>
+          <button onclick="editPost('${postId}', '${postData.postText.replace(/'/g, "\\'")}')">Edit</button>
           <button onclick="deletePost('${postId}')">Delete</button>
         </div>`;
     });
   } catch (error) {
-    console.error("Error fetching user posts:", error);
+    console.error("🔥 Error fetching user posts:", error);
+    myPostDiv.innerHTML = "<p>Error loading posts. Check console.</p>";
   }
 };
 
@@ -47,10 +50,10 @@ window.editPost = async (postId, oldText) => {
     try {
       let postRef = doc(db, "posts", postId);
       await updateDoc(postRef, { postText: newText });
-      document.querySelector(`#post-text-${postId}`).textContent = newText; // Update UI
-      alert("Post updated successfully!");
+      document.querySelector(`#post-text-${postId}`).textContent = newText;
+      alert("✅ Post updated successfully!");
     } catch (error) {
-      console.error("Error updating post:", error);
+      console.error("❌ Error updating post:", error);
       alert("Failed to update post.");
     }
   }
@@ -63,10 +66,10 @@ window.deletePost = async (postId) => {
     try {
       let postRef = doc(db, "posts", postId);
       await deleteDoc(postRef);
-      document.querySelector(`#post-${postId}`).remove(); // Remove from UI
-      alert("Post deleted successfully!");
+      document.querySelector(`#post-${postId}`).remove();
+      alert("🗑️ Post deleted successfully!");
     } catch (error) {
-      console.error("Error deleting post:", error);
+      console.error("❌ Error deleting post:", error);
       alert("Failed to delete post.");
     }
   }
@@ -79,7 +82,7 @@ document.querySelector("#signOut").addEventListener("click", async () => {
     localStorage.removeItem("loggedInUser");
     window.location.replace("./index.html");
   } catch (error) {
-    console.error("Logout error:", error);
+    console.error("❌ Logout error:", error);
   }
 });
 

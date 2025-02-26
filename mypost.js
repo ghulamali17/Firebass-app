@@ -6,18 +6,29 @@ import { db, auth } from "./firebaseConfig.js";
 
 let myPostDiv = document.querySelector("#myPosts");
 
-// Check logged in
+// Check if user logged in
 let loggedInUser = localStorage.getItem("loggedInUser");
 if (!loggedInUser) {
+  alert("You need to log in first!");
   window.location.replace("./index.html");
 }
 
+// Function to Display User's Posts
 let getMyPosts = async () => {
   try {
+    console.log("Fetching posts for UID:", loggedInUser);
     myPostDiv.innerHTML = "";
+
+    //query user's posts
     const q = query(collection(db, "posts"), where("uid", "==", loggedInUser));
     const querySnapshot = await getDocs(q);
-    
+
+    if (querySnapshot.empty) {
+      console.log("No posts found for this user.");
+      myPostDiv.innerHTML = "<p>No posts available.</p>";
+      return;
+    }
+
     querySnapshot.forEach((post) => {
       let postData = post.data();
       let postId = post.id; 
@@ -34,6 +45,7 @@ let getMyPosts = async () => {
     });
   } catch (error) {
     console.error("Error fetching user posts:", error);
+    alert("Failed to load posts. Check the console for more details.");
   }
 };
 
